@@ -1,0 +1,108 @@
+:root{
+    --charmoveinterval: placeholdertextthatgetsoverwritteninjs;
+    --charsize:  placeholdertextthatgetsoverwritteninjs;
+    --mousesize: placeholdertextthatgetsoverwritteninjs;
+}
+
+html, body{
+  height: 100%;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+title{
+    display: none;
+}
+
+#scoreboard{
+  top: 0px;
+  left: 0px;
+  position: relative;
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+}
+
+#slideaway{
+    height:100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgb(170, 170, 170);
+    animation: goleft 1.2s forwards;
+    z-index: 999;
+}
+
+#bigbox{
+    height: 100vh;
+    background-color: rgb(58, 58, 58);
+}
+
+
+
+#char{
+    height: var(--charsize);
+    width: var(--charsize);
+    background-image: url("cat.png");
+    background-size: cover;
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
+#mouse{
+  height: var(--mousesize);
+  width: var(--mousesize);
+  background-image: url("mouse.png");
+  background-size: cover;
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes goleft{
+    0%{}
+    100%{left: -100%;}
+}
+
+@keyframes moveleft{
+    0%{
+      transform: translateX(0);
+    }
+    100%{
+      transform: translateX(calc(var(--charmoveinterval)*-1));
+    }
+  }
+
+@keyframes moveright{
+    0%{
+      transform: translateX(0);
+    }
+    100%{
+      transform: translateX(var(--charmoveinterval));
+    }
+  }
+@keyframes moveup{
+    0%{
+      transform: translateY(0);
+    }
+    100%{
+      transform: translateY(calc(var(--charmoveinterval)*-1));
+    }
+  }
+
+@keyframes movedown{
+    0%{
+      transform: translateY(0);
+    }
+    100%{
+      transform: translateY(var(--charmoveinterval));
+    }
+  }
+
+
