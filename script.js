@@ -107,11 +107,14 @@ function despawn_mouse(){
   mouse.style.display = "none";
 }
 
+
 function mouse_caught(){
   despawn_mouse();
   spawn_mouse();
   score += 1;
   scoreboard.textContent = score.toString();
+  const meow = new Audio("meow.mp3");
+  meow.play();
 }
 
 

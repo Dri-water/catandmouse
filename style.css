@@ -19,12 +19,12 @@ title{
 }
 
 #scoreboard{
-  top: 0px;
-  left: 0px;
-  position: relative;
+  position: static;
   color: white;
   font-size: 24px;
   z-index: 10;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
 #slideaway{
@@ -40,7 +40,8 @@ title{
 
 #bigbox{
     height: 100vh;
-    background-color: rgb(58, 58, 58);
+    background-image: url("bg.jpg");
+    background-size: cover;
 }
 
 
