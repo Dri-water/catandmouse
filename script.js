@@ -3,17 +3,31 @@ const mouse = document.getElementById("mouse");
 var scoreboard = document.getElementById("scorepoints");
 var score = 0;
 
-var movementinterval = 100;
+var movementinterval = 10;
 var movementtime = "0.15s";
-var charsize = 100;
-var mouse_size = 70;
-document.documentElement.style.setProperty("--charmoveinterval", movementinterval + "px");
-document.documentElement.style.setProperty("--charsize", charsize + "px" );
-document.documentElement.style.setProperty("--mousesize", mouse_size + "px" );
+var charsize = 7;
+var mouse_size = 5;
+document.documentElement.style.setProperty("--charmoveinterval", movementinterval + "rem");
+document.documentElement.style.setProperty("--charsize", charsize + "rem" );
+document.documentElement.style.setProperty("--mousesize", mouse_size + "rem" );
+
+
+function getRemPixelValue() {
+  const htmlElement = document.querySelector("html");
+  const computedFontSize = window.getComputedStyle(htmlElement).fontSize;
+  
+  // Parse the computed font size value
+  const fontSizeValue = parseFloat(computedFontSize);
+  
+  // Calculate the pixel value of 1rem
+  const remPixelValue = fontSizeValue;
+  
+  return remPixelValue;
+}
 
 // sets initial starting pos
-char.style.left = screen.width/2 + 'px';
-char.style.top = screen.height/2 + 'px';
+char.style.left = (screen.width/2)/getRemPixelValue() + 'rem' ;
+char.style.top = (screen.height/2)/getRemPixelValue() + 'rem';
 
 var animationongoing = false
 
@@ -21,22 +35,22 @@ char.addEventListener("animationend", (event) => {
   console.count(char.style.left)
   if (event.animationName === "moveup"){
     char.style.animation = "none";
-    char.style.top = parseInt(char.style.top) - movementinterval + 'px';
+    char.style.top = parseInt(char.style.top) - movementinterval + 'rem';
     animationongoing = false;
   }
   else if (event.animationName === "movedown"){
     char.style.animation = "none";
-    char.style.top = parseInt(char.style.top) + movementinterval + 'px';
+    char.style.top = parseInt(char.style.top) + movementinterval + 'rem';
     animationongoing = false;
   }
   else if (event.animationName === "moveleft"){
     char.style.animation = "none";
-    char.style.left = parseInt(char.style.left) - movementinterval + 'px';
+    char.style.left = parseInt(char.style.left) - movementinterval + 'rem';
     animationongoing = false;
   }
   else if (event.animationName === "moveright"){
     char.style.animation = "none";
-    char.style.left = parseInt(char.style.left) + movementinterval + 'px';
+    char.style.left = parseInt(char.style.left) + movementinterval + 'rem';
     animationongoing = false;
   }
   if (checkoverlap(char, mouse)){
@@ -44,6 +58,8 @@ char.addEventListener("animationend", (event) => {
   }
 });
 
+
+// for keyboard inputs
 function movement_detector(){
   document.addEventListener("keydown", (event) => {
   if (animationongoing === false){
@@ -78,11 +94,11 @@ function movement_detector(){
 movement_detector()
 // calls movement detector function to get the event listener initialised
 
-window.addEventListener("focus", function() {
-// ensures that the movement detector is reintialised whenever the window is unfocussed and refocussed again. apparently eventlisteners can be disabled upon unfocussing
-  movement_detector();
-  console.log("refocused");
-});
+
+
+
+
+
 
 function spawn_mouse(){
   mouse.style.display = ""
@@ -118,5 +134,62 @@ function mouse_caught(){
 }
 
 
+//THE CHATTGPT ZONE:
+// Get references to the buttons
+const upButton = document.getElementById("upButton");
+const leftButton = document.getElementById("leftButton");
+const downButton = document.getElementById("downButton");
+const rightButton = document.getElementById("rightButton");
+
+// Add event listeners to the buttons
+function movement_detector_buttons(){
+
+    upButton.addEventListener("click", function() {
+      console.log("Up button clicked!");
+      if (animationongoing === false){
+        char.style.animation = "none";
+        char.offsetWidth;
+        char.style.animation = "moveup " + movementtime + " forwards linear";
+        animationongoing = true;
+      }
+    });
+
+    leftButton.addEventListener("click", function() {
+      if (animationongoing === false){
+        char.style.animation = "none";
+        char.offsetWidth;
+        char.style.animation = "moveleft " + movementtime + " forwards linear";
+        animationongoing = true;
+      }
+    });
+
+    downButton.addEventListener("click", function() {
+      if (animationongoing === false){
+        char.style.animation = "none";
+        char.offsetWidth;
+        char.style.animation = "movedown " + movementtime + " forwards linear";
+        console.log("down pressed");
+        animationongoing = true;
+      }
+    });
+
+    rightButton.addEventListener("click", function() {
+      if (animationongoing === false){
+        char.style.animation = "none";
+        char.offsetWidth;
+        char.style.animation = "moveright " + movementtime + " forwards linear";
+        animationongoing = true;
+      }
+    });
+  
+}
+movement_detector_buttons()
 
 
+//ensure this part remains
+window.addEventListener("focus", function() {
+  // ensures that the movement detector is reintialised whenever the window is unfocussed and refocussed again. apparently eventlisteners can be disabled upon unfocussing
+    movement_detector();
+    movement_detector_buttons();
+    console.log("refocused");
+  });
